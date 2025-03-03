@@ -10,6 +10,8 @@ class Animal {
 
 	public:
 		Animal();
+		Animal(const Animal& other);
+		Animal& operator=(const Animal& other);
 		virtual ~Animal();
 
 		virtual void makeSound() const;
@@ -19,7 +21,10 @@ class Animal {
 class Dog : public Animal {
 	public:
 		Dog();
+		Dog(const Dog& other);
+		Dog& operator=(const Dog& other);
 		~Dog();
+
 		void	makeSound() const;
 
 };
@@ -27,7 +32,10 @@ class Dog : public Animal {
 class Cat : public Animal {
 	public:
 		Cat();
+		Cat(const Cat& other);
+		Cat& operator=(const Cat& other);
 		~Cat();
+
 		void makeSound() const;
 };
 

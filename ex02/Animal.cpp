@@ -5,6 +5,18 @@ Animal::Animal() : type("Animal") {
 	std::cout << "Animal has been created" << std::endl;
 }
 
+Animal::Animal(const Animal& other) {
+	*this = other;
+	std::cout << "Animal copied" << std::endl;
+}
+
+Animal& Animal::operator=(const Animal& other) {
+	if (this != &other)
+		this->type = other.type;
+	std::cout << "Animal assigned" << std::endl;
+	return *this;
+}
+
 Animal::~Animal() {
 	std::cout << "Animal has been destroyed" << std::endl;
 }
@@ -41,7 +53,7 @@ Dog::Dog() {
 }
 
 // Construtor de cópia (Deep Copy)
-Dog::Dog(const Dog& other) : Animal(other) {
+Dog::Dog(const Dog& other) : AAnimal(other){
 	this->brain = new Brain(*other.brain);  // Criando cópia profunda do cérebro
 	std::cout << "Dog copied!" << std::endl;
 }
@@ -50,7 +62,7 @@ Dog::Dog(const Dog& other) : Animal(other) {
 Dog& Dog::operator=(const Dog& other) {
 	std::cout << "Dog assigned!" << std::endl;
 	if (this != &other) {
-		Animal::operator=(other);
+		AAnimal::operator=(other);
 		delete this->brain;  // Evita vazamento de memória
 		this->brain = new Brain(*other.brain);  // Criando nova cópia do cérebro
 	}
@@ -88,7 +100,7 @@ Cat::Cat() {
 }
 
 // Construtor de cópia (Deep Copy)
-Cat::Cat(const Cat& other) : Animal(other) {
+Cat::Cat(const Cat& other) : AAnimal(other) {
 	this->brain = new Brain(*other.brain);
 	std::cout << "Cat copied!" << std::endl;
 }
@@ -97,7 +109,7 @@ Cat::Cat(const Cat& other) : Animal(other) {
 Cat& Cat::operator=(const Cat& other) {
 	std::cout << "Cat assigned!" << std::endl;
 	if (this != &other) {
-		Animal::operator=(other);
+		AAnimal::operator=(other);
 		delete this->brain;
 		this->brain = new Brain(*other.brain);
 	}
